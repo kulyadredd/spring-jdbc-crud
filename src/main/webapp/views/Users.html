@@ -1,0 +1,88 @@
+<div class="section">
+    <div class="container">
+        <div class="col-md-12 center-align">
+            <h4>{{headingTitle}}</h4>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <h4>Total: {{users.count}}</h4>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-success button-align" ng-click="openModalAddNewUser()">ADD</button>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in users.userList">
+                <th class="table-data">
+                    <h4>{{user.id}}</h4>
+                    <input ng-model="user.id" class="form-control" type="hidden" value="{{user.id}}">
+                </th>
+                <th class="table-data">
+                    <h4 ng-show="!editable">{{user.name}}</h4>
+                    <input ng-show="editable" ng-model="user.name" class="form-control" type="text"
+                           value="{{user.name}}">
+                </th>
+                <th class="table-data">
+                    <h4 ng-show="!editable">{{user.email}}</h4>
+                    <input ng-show="editable" ng-model="user.email" class="form-control" type="text"
+                           value="{{user.email}}">
+                </th>
+                <th class="table-data">
+                    <h4 ng-show="!editable">{{user.mobile}}</h4>
+                    <input ng-show="editable" ng-model="user.mobile" class="form-control" type="text"
+                           value="{{user.mobile}}">
+                </th>
+                <th>
+                    <button ng-show="!editable" type="button" class="btn btn-info btn-lg"
+                            ng-click="editable = !editable">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </button>
+                    <button ng-show="editable" type="button" class="btn btn-success btn-lg"
+                            ng-click="updateUser(user); editable = !editable">
+                        <i class="fa fa-check-square" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger btn-lg" ng-click="deleteUser(user.id)">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+        <div class="col-md-12 center-align">
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group" role="group">
+                    <button ng-disabled="disableFirstAndPrevBtn" type="button" class="btn btn-default"
+                            ng-click="firstPage()">first page
+                    </button>
+                    <button ng-disabled="disableFirstAndPrevBtn" type="button" class="btn btn-default"
+                            ng-click="prevPage()">previus
+                    </button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button ng-repeat="page in pages" ng-disabled="page.isDisable" type="button" ng-class="page.style"
+                            class="btn" ng-click="goToPage(page.value)">{{page.value}}
+                    </button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button ng-disabled="disableLastAndNextBtn" type="button" class="btn btn-default"
+                            ng-click="nextPage()">next
+                    </button>
+                    <button ng-disabled="disableLastAndNextBtn" type="button" class="btn btn-default"
+                            ng-click="lastPage()">last page
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
